@@ -1,0 +1,25 @@
+char myBuf[10];
+int m = 1;
+void setup() 
+{
+  Serial.begin(57600);
+}
+
+void loop() 
+{
+  byte n = Serial.available();
+  while (Serial.available() > 0)
+  {
+    Serial.readBytes(myBuf, sizeof(n));
+    
+    Serial.write(myBuf);
+    m = memcmp(myBuf,"0220200003",sizeof(n));
+    
+    memset(myBuf, 0x00, 10); //array elements are reset to 0s
+    
+  }
+  if (m == 0 )
+  {
+    Serial.print("Ok");
+  }
+}
